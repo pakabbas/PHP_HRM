@@ -1,0 +1,36 @@
+<?php
+$currentRoute = $_GET['route'] ?? 'dashboard/index';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($pageTitle ?? 'HRM') ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
+</head>
+<body>
+    <div class="app-shell">
+        <?php require base_path('app/views/partials/sidebar.php'); ?>
+        <div class="app-main">
+            <?php require base_path('app/views/partials/topbar.php'); ?>
+            <main class="app-content">
+                <?php if (!empty($flash)): ?>
+                    <div class="alert alert-<?= $flash['type'] ?> shadow-sm">
+                        <?= is_array($flash['message']) ? implode('<br>', $flash['message']) : htmlspecialchars($flash['message']) ?>
+                    </div>
+                <?php endif; ?>
+                <?= $content ?>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= asset('assets/js/app.js') ?>"></script>
+</body>
+</html>
+
