@@ -29,31 +29,44 @@ class ConfigController extends Controller
         verify_csrf();
         $entity = $_POST['entity'];
         $id = !empty($_POST['id']) ? (int) $_POST['id'] : null;
-        $payload = match ($entity) {
-            'departments' => [
-                'department_name' => $_POST['department_name'],
-                'status' => $_POST['status'] ?? 1,
-            ],
-            'designations' => [
-                'designation_name' => $_POST['designation_name'],
-                'status' => $_POST['status'] ?? 1,
-            ],
-            'cities' => [
-                'city_name' => $_POST['city_name'],
-                'status' => $_POST['status'] ?? 1,
-            ],
-            'configurations' => [
-                'config_type' => $_POST['config_type'],
-                'config_key' => $_POST['config_key'],
-                'config_value' => $_POST['config_value'],
-                'status' => $_POST['status'] ?? 1,
-            ],
-            'holidays' => [
-                'holiday_date' => $_POST['holiday_date'],
-                'description' => $_POST['description'],
-            ],
-            default => [],
-        };
+        
+        switch ($entity) {
+            case 'departments':
+                $payload = [
+                    'department_name' => $_POST['department_name'],
+                    'status' => $_POST['status'] ?? 1,
+                ];
+                break;
+            case 'designations':
+                $payload = [
+                    'designation_name' => $_POST['designation_name'],
+                    'status' => $_POST['status'] ?? 1,
+                ];
+                break;
+            case 'cities':
+                $payload = [
+                    'city_name' => $_POST['city_name'],
+                    'status' => $_POST['status'] ?? 1,
+                ];
+                break;
+            case 'configurations':
+                $payload = [
+                    'config_type' => $_POST['config_type'],
+                    'config_key' => $_POST['config_key'],
+                    'config_value' => $_POST['config_value'],
+                    'status' => $_POST['status'] ?? 1,
+                ];
+                break;
+            case 'holidays':
+                $payload = [
+                    'holiday_date' => $_POST['holiday_date'],
+                    'description' => $_POST['description'],
+                ];
+                break;
+            default:
+                $payload = [];
+                break;
+        }
 
         $this->config->save($entity, $payload, $id);
         flash_set('config', ucfirst($entity) . ' saved.', 'success');

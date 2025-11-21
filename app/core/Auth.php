@@ -50,7 +50,10 @@ class Auth
         return $this->user;
     }
 
-    public function hasRole(array|string $roles): bool
+    /**
+     * @param array|string $roles
+     */
+    public function hasRole($roles): bool
     {
         if (!$this->check()) {
             return false;
