@@ -1,0 +1,39 @@
+# Module Breakdown and Logic Flows
+
+Users Module:
+- Create login accounts for employees
+- Assign roles: admin, hr, manager, employee
+- Only admin can manage roles
+
+Employees Module:
+- Store employee personal and job details
+- Link to departments, designations, salary structure
+
+Attendance Module:
+- Daily attendance entries with check in/out timing
+- Status options: present, absent, leave, half_day, holiday
+
+Leave Management:
+- Leave types contain default annual allocation
+- Leave allocation per employee stored in leave_balances (per year)
+- Leave requests workflow: pending → approved/rejected
+- On approval: update leave_balances.used and remaining
+- If remaining < requested days → convert extra days to unpaid leave
+
+Holiday Module:
+- Used in attendance and leave calculation
+
+Payroll Module:
+- employee_salary_settings stores base salary, overtime rate
+- salary_allowances & salary_deductions store recurring values
+- loans auto deduct monthly installment until closed
+- overtime tracked monthly
+- payroll_runs stores monthly processed final salary
+- payroll summary = base salary + allowances + OT - unpaid leave - deductions - loan installment
+
+Reports Module:
+- employee report, attendance report, leave report, payroll report
+- filters: date range, department, employee, status
+
+Configurations:
+- Manage departments, designations, cities and dictionary values

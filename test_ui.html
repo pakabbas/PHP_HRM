@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRM - Gradient Wave + Apple Glass UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Gradient Wave Background */
+        .wave-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #002A5E 0%, #0A84FF 50%, #002A5E 100%);
+            overflow: hidden;
+        }
+
+        .wave-background::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle at 30% 40%, rgba(10, 132, 255, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(0, 122, 255, 0.2) 0%, transparent 50%);
+            animation: waveMove 20s ease-in-out infinite;
+        }
+
+        .wave-background::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            right: -25%;
+            background: radial-gradient(ellipse at 80% 20%, rgba(0, 42, 94, 0.4) 0%, transparent 60%);
+            animation: waveMove 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes waveMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-5%, -5%) rotate(5deg); }
+        }
+
+        /* Floating Glass Nav Bar */
+        .nav-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 30px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInElevation 0.6s ease;
+        }
+
+        @keyframes fadeInElevation {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 240ms ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Glass Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 20px;
+            top: 100px;
+            width: 80px;
+            height: calc(100vh - 140px);
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 25px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+            z-index: 999;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInElevation 0.8s ease;
+        }
+
+        .sidebar-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: #FFFFFF;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 240ms ease;
+        }
+
+        .sidebar-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            margin-left: 120px;
+            margin-top: 100px;
+            padding: 30px;
+            max-width: 1400px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+            animation: fadeInElevation 1s ease;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        /* Dashboard Cards Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 240ms ease;
+            animation: fadeInElevation 1.2s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 122, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #007AFF;
+        }
+
+        .card-title {
+            font-size: 14px;
+            color: #1A1A1A;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 10px;
+        }
+
+        .card-change {
+            font-size: 12px;
+            color: #007AFF;
+            font-weight: 500;
+        }
+
+        /* Apple Glass Button */
+        .glass-button {
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 2px solid #007AFF;
+            border-radius: 25px;
+            padding: 12px 28px;
+            color: #FFFFFF;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 240ms ease;
+            box-shadow: 0 0 12px rgba(0, 122, 255, 0.6);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .glass-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(0, 122, 255, 0.8);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Glass Table Container */
+        .table-container {
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            animation: fadeInElevation 1.4s ease;
+            overflow-x: auto;
+        }
+
+        .table-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #FFFFFF;
+        }
+
+        thead {
+            border-bottom: 2px solid rgba(0, 122, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 240ms ease;
+        }
+
+        /* Floating Action Bar */
+        .action-bar {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 998;
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 240ms ease;
+        }
+
+        .action-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 122, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                left: 10px;
+            }
+
+            .main-content {
+                margin-left: 80px;
+                padding: 20px 15px;
+            }
+
+            .nav-bar {
+                width: 95%;
+                padding: 0 20px;
+            }
+
+            .nav-menu {
+                gap: 10px;
+            }
+
+            .nav-menu a {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-bar {
+                top: 90px;
+                right: 10px;
+            }
+
+            .action-icon {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 50px;
+                padding: 15px 0;
+            }
+
+            .sidebar-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Gradient Wave Background -->
+    <div class="wave-background"></div>
+
+    <!-- Floating Glass Nav Bar -->
+    <nav class="nav-bar">
+        <div class="nav-logo">HRM System</div>
+        <ul class="nav-menu">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Employees</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Glass Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-icon" title="Home">🏠</div>
+        <div class="sidebar-icon" title="Users">👥</div>
+        <div class="sidebar-icon" title="Calendar">📅</div>
+        <div class="sidebar-icon" title="Analytics">📊</div>
+        <div class="sidebar-icon" title="Settings">⚙️</div>
+    </aside>
+
+    <!-- Floating Action Bar -->
+    <div class="action-bar">
+        <div class="action-icon" title="Add New">➕</div>
+        <div class="action-icon" title="Notifications">🔔</div>
+        <div class="action-icon" title="Search">🔍</div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Welcome to HRM Dashboard</h1>
+            <p class="hero-subtitle">Manage your workforce with elegance and efficiency</p>
+        </section>
+
+        <!-- Dashboard Cards -->
+        <section class="dashboard-grid">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">👥</div>
+                </div>
+                <div class="card-title">Total Employees</div>
+                <div class="card-value">1,247</div>
+                <div class="card-change">↑ 12% from last month</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">✅</div>
+                </div>
+                <div class="card-title">Active Projects</div>
+                <div class="card-value">48</div>
+                <div class="card-change">↑ 5% from last month</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                </div>
+                <div class="card-title">Attendance Rate</div>
+                <div class="card-value">94.2%</div>
+                <div class="card-change">↑ 2.1% from last month</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">💰</div>
+                </div>
+                <div class="card-title">Monthly Payroll</div>
+                <div class="card-value">$2.4M</div>
+                <div class="card-change">↑ 8% from last month</div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <section style="margin-bottom: 30px; text-align: center;">
+            <a href="#" class="glass-button">Add New Employee</a>
+            <a href="#" class="glass-button" style="margin-left: 15px;">Generate Report</a>
+        </section>
+
+        <!-- Glass Table Container -->
+        <div class="table-container">
+            <h2 class="table-title">Recent Activities</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Department</th>
+                        <th>Activity</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Engineering</td>
+                        <td>Project Completion</td>
+                        <td>2024-01-15</td>
+                        <td>✅ Completed</td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>Marketing</td>
+                        <td>Campaign Launch</td>
+                        <td>2024-01-14</td>
+                        <td>✅ Completed</td>
+                    </tr>
+                    <tr>
+                        <td>Mike Johnson</td>
+                        <td>Sales</td>
+                        <td>Client Meeting</td>
+                        <td>2024-01-14</td>
+                        <td>⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>Sarah Williams</td>
+                        <td>HR</td>
+                        <td>Recruitment Drive</td>
+                        <td>2024-01-13</td>
+                        <td>✅ Completed</td>
+                    </tr>
+                    <tr>
+                        <td>David Brown</td>
+                        <td>Finance</td>
+                        <td>Budget Review</td>
+                        <td>2024-01-13</td>
+                        <td>✅ Completed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

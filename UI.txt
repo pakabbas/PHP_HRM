@@ -1,0 +1,54 @@
+# UI: Gradient Wave + Apple Glass Hybrid Theme
+
+Visual Style:
+- Main background uses abstract gradient wave shapes (blue ocean tones).
+- Foreground UI components use Apple Glass style: semi-transparent frosted cards with blur.
+- Minimalistic, modern, highly visual and clean.
+- Depth created via layered shadows and light reflections.
+
+Color System:
+- Base gradient: Deep Blue (#002A5E) to Aqua Blue (#0A84FF)
+- Accent Blue (Apple style): #007AFF
+- Text Primary: #FFFFFF on dark gradients / #1A1A1A on glass cards
+- Cards Glass Base: rgba(255,255,255,0.24) + backdrop-filter: blur(18px)
+- Light shadows: 0 8px 22px rgba(0,0,0,0.18)
+
+Layout Rules:
+- Full-screen gradient abstract wave background across app
+- Nav bar: floating glass bar, transparent, blurred, shadow depth
+- Sidebar: glass side panel with icons
+- Main content: glass cards floating above background
+- Dashboard cards: frosted glass tiles with icons + numbers
+- Panels open as floating windows (glass modal style)
+
+Button Style:
+- Apple-glass pill button with glowing blue border
+- Subtle hover scale animation (scale 1.03)
+- Soft neon glow: box-shadow: 0 0 12px rgba(0,122,255,0.6)
+
+Responsiveness:
+- Mobile-first grid layout
+- Sidebar collapses to icon-only vertical bar
+- Dashboard cards convert to full-width stacked cards
+
+Components Needed:
+- Hero welcome section with gradient-wave like screenshot for login / main landing
+- Rounded blur card for login form in center
+- Floating action bar with icons on top-right
+- Tables in glass semi-transparent containers with white text and glowing divider lines
+
+Animations:
+- fade-in elevations
+- transitions: 240ms ease
+
+Sample Section Layout:
+[Top Nav Glass Bar]
+[Dashboard summary glass cards with icons]
+[Wave background visible subtly behind cards]
+
+Use Cases by Role:
+- Employee dashboard minimal with big cards & icons
+- HR/Admin more analytics UI with advanced tables, calendar & chart overlays
+
+Overall Mood:
+Elegant, futuristic, premium, calm. No clutter.

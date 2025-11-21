@@ -1,0 +1,29 @@
+# PROJECT: PHP_HRM - Human Resource Management System
+# BACKEND: Core PHP (no framework), MySQL, Bootstrap UI
+
+Core Requirements:
+- Build a web-based HRM system with CRUD operations for all modules.
+- Use MVC-style folder structure and reusable layouts.
+- Role-based access control: admin, hr, manager, employee.
+- Login session-based authentication.
+- Dashboard for quick stats: total employees, present today, pending leaves, payroll pending.
+
+Major Modules:
+1. Users & Roles
+2. Employees Master
+3. Attendance Management
+4. Leave Management (Leave Requests, Leave Balances, Leave Types, Holidays)
+5. Payroll Management (Salary setup, allowances, deductions, overtime, loans, payroll run)
+6. Reports
+7. System Configuration (Departments, Designations, Cities, Dictionary items)
+
+Functional Requirements:
+- Employees can apply for leave; HR or Manager approves/rejects.
+- Approved leave automatically deducts from leave balances.
+- If leave balance is zero → convert to unpaid leave for payroll deduction.
+- Payroll module: calculate monthly salaries automatically using attendance, overtime & deductions.
+- Support full CRUD, forms validation, and listing pages with pagination + search.
+- All modules to follow same consistent UI design.
+
+Output Formats:
+- Reports downloadable in PDF or Excel.
