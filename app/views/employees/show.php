@@ -2,6 +2,10 @@
 $deptMap = array_column($departments, 'department_name', 'id');
 $desgMap = array_column($designations, 'designation_name', 'id');
 $cityMap = array_column($cities, 'city_name', 'id');
+$breadcrumbs = [
+    ['label' => 'Employees', 'route' => 'employees/index'],
+    ['label' => htmlspecialchars($employee['first_name'] . ' ' . $employee['last_name']), 'route' => '']
+];
 ?>
 <div class="card shadow-sm">
     <div class="card-header bg-white d-flex justify-content-between align-items-center">

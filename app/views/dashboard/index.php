@@ -1,4 +1,7 @@
 <?php
+$breadcrumbs = [
+    ['label' => 'Dashboard', 'route' => 'dashboard/index']
+];
 $renderCard = function ($title, $value, $icon, $subtext = null) {
     $title = $title;
     $value = $value;
@@ -7,7 +10,7 @@ $renderCard = function ($title, $value, $icon, $subtext = null) {
     include base_path('app/views/components/stat-card.php');
 };
 ?>
-<div class="row g-3">
+<div class="row g-3 mb-4">
     <div class="col-md-3">
         <?php $renderCard('Total Employees', number_format($stats['employees']), 'bi-people', 'Active workforce'); ?>
     </div>
@@ -22,7 +25,7 @@ $renderCard = function ($title, $value, $icon, $subtext = null) {
     </div>
 </div>
 
-<div class="row g-4 mt-2">
+<div class="row g-4 mb-4">
     <div class="col-lg-7">
         <div class="card h-100 shadow-sm">
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
@@ -77,7 +80,7 @@ $renderCard = function ($title, $value, $icon, $subtext = null) {
     </div>
 </div>
 
-<div class="row g-4 mt-1">
+<div class="row g-4">
     <div class="col-lg-6">
         <div class="card shadow-sm h-100">
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
@@ -88,7 +91,7 @@ $renderCard = function ($title, $value, $icon, $subtext = null) {
                 <a href="<?= route_to('payroll/index') ?>" class="btn btn-sm btn-outline-primary">Manage</a>
             </div>
             <div class="card-body table-responsive">
-                <table class="table align-middle">
+                <table class="table table-striped align-middle">
                     <thead>
                         <tr>
                             <th>Employee</th>

@@ -1,3 +1,8 @@
+<?php
+$breadcrumbs = [
+    ['label' => 'User Accounts', 'route' => 'users/index']
+];
+?>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h5 class="mb-0">User Accounts</h5>
     <a href="<?= route_to('users/create') ?>" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Add User</a>
@@ -21,7 +26,7 @@
 
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table align-middle mb-0">
+        <table class="table table-striped align-middle mb-0">
             <thead class="table-light">
                 <tr>
                     <th>Username</th>

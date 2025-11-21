@@ -1,3 +1,8 @@
+<?php
+$breadcrumbs = [
+    ['label' => 'Attendance', 'route' => 'attendance/index']
+];
+?>
 <div class="card shadow-sm mb-4">
     <div class="card-body">
         <form class="row g-3" method="get">
@@ -37,7 +42,7 @@
                 <?php endif; ?>
             </div>
             <div class="card-body table-responsive">
-                <table class="table align-middle">
+                <table class="table table-striped align-middle">
                     <thead class="table-light">
                         <tr>
                             <th>Date</th>

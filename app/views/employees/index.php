@@ -1,3 +1,8 @@
+<?php
+$breadcrumbs = [
+    ['label' => 'Employees', 'route' => 'employees/index']
+];
+?>
 <div class="card shadow-sm mb-4">
     <div class="card-body">
         <form class="row g-3 align-items-end" method="get">
@@ -38,7 +43,7 @@
 
 <div class="card shadow-sm">
     <div class="card-body table-responsive">
-        <table class="table align-middle">
+        <table class="table table-striped align-middle">
             <thead class="table-light text-uppercase small">
                 <tr>
                     <th>Code</th>

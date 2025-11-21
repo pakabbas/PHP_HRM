@@ -138,7 +138,7 @@
         <h5 class="mb-0">Salary Overview</h5>
     </div>
     <div class="table-responsive">
-        <table class="table align-middle mb-0">
+        <table class="table table-striped align-middle mb-0">
             <thead class="table-light">
                 <tr>
                     <th>Employee</th>
@@ -168,7 +168,7 @@
         <h5 class="mb-0">Recent Payroll Runs</h5>
     </div>
     <div class="table-responsive">
-        <table class="table align-middle mb-0">
+        <table class="table table-striped align-middle mb-0">
             <thead class="table-light">
                 <tr>
                     <th>Employee</th>

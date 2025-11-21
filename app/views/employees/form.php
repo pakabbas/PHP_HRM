@@ -1,6 +1,10 @@
 <?php
 $isEdit = !empty($employee);
 $action = $isEdit ? route_to('employees/update/' . $employee['id']) : route_to('employees/store');
+$breadcrumbs = [
+    ['label' => 'Employees', 'route' => 'employees/index'],
+    ['label' => $isEdit ? 'Edit Employee' : 'Add Employee', 'route' => '']
+];
 ?>
 <div class="card shadow-sm">
     <div class="card-header bg-white d-flex justify-content-between align-items-center">

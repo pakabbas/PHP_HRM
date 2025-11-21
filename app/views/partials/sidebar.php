@@ -23,7 +23,7 @@ $navItems = [
     <nav class="mt-4">
         <?php foreach ($navItems as $item): ?>
             <?php if (!in_array($role, $item['roles'], true)) continue; ?>
-            <a class="nav-link <?= str_starts_with($currentRoute, $item['route']) ? 'active' : '' ?>"
+            <a class="nav-link <?= strpos($currentRoute, $item['route']) === 0 ? 'active' : '' ?>"
                href="<?= route_to($item['route']) ?>">
                 <i class="bi <?= $item['icon'] ?>"></i>
                 <span><?= $item['label'] ?></span>

@@ -1,3 +1,8 @@
+<?php
+$breadcrumbs = [
+    ['label' => 'Reports', 'route' => 'reports/index']
+];
+?>
 <div class="card shadow-sm mb-4">
     <div class="card-body">
         <form class="row g-3 align-items-end" method="get">

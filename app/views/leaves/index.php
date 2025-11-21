@@ -1,3 +1,8 @@
+<?php
+$breadcrumbs = [
+    ['label' => 'Leave Requests', 'route' => 'leaves/index']
+];
+?>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h5 class="mb-0">Leave Requests</h5>
     <div class="d-flex gap-2">
@@ -39,7 +44,7 @@
 
 <div class="card shadow-sm">
     <div class="card-body table-responsive">
-        <table class="table align-middle">
+        <table class="table table-striped align-middle">
             <thead class="table-light">
                 <tr>
                     <th>Employee</th>

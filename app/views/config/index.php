@@ -1,4 +1,7 @@
 <?php
+$breadcrumbs = [
+    ['label' => 'Configurations', 'route' => 'config/index']
+];
 $entities = [
     'departments' => ['label' => 'Departments', 'fields' => ['department_name' => 'Department Name']],
     'designations' => ['label' => 'Designations', 'fields' => ['designation_name' => 'Designation Name']],

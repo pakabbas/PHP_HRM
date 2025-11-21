@@ -20,15 +20,20 @@ $currentRoute = $_GET['route'] ?? 'dashboard/index';
         <div class="app-main">
             <?php require base_path('app/views/partials/topbar.php'); ?>
             <main class="app-content">
+                <?php require base_path('app/views/components/breadcrumb.php'); ?>
                 <?php if (!empty($flash)): ?>
-                    <div class="alert alert-<?= $flash['type'] ?> shadow-sm">
+                    <div class="alert alert-<?= $flash['type'] ?> alert-dismissible fade show shadow-sm" role="alert">
                         <?= is_array($flash['message']) ? implode('<br>', $flash['message']) : htmlspecialchars($flash['message']) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif; ?>
                 <?= $content ?>
             </main>
+            <?php require base_path('app/views/partials/footer.php'); ?>
         </div>
     </div>
+    <?php require base_path('app/views/components/toast.php'); ?>
+    <?php require base_path('app/views/components/modal-confirm.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= asset('assets/js/app.js') ?>"></script>
 </body>
