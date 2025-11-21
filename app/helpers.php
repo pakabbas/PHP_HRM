@@ -21,17 +21,31 @@ if (!function_exists('base_url')) {
     {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
-        $base = rtrim($protocol . '://' . $host . $scriptDir, '/');
-        $url = $path ? $base . '/' . ltrim($path, '/') : $base . '/';
-        return rtrim($url, '/') . '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Handle root directory
+        if ($scriptDir === '/' || $scriptDir === '\\') {
+            $scriptDir = '';
+        }
+        
+        $scriptDir = str_replace('\\', '/', $scriptDir);
+        $base = $protocol . '://' . $host . $scriptDir;
+        
+        if ($path) {
+            $path = ltrim(str_replace('\\', '/', $path), '/');
+            return rtrim($base, '/') . '/' . $path;
+        }
+        
+        return rtrim($base, '/') . '/';
     }
 }
 
 if (!function_exists('asset')) {
     function asset(string $path): string
     {
-        return base_url('public/' . ltrim($path, '/'));
+        $path = ltrim($path, '/');
+        return base_url('public/' . $path);
     }
 }
 
@@ -93,6 +107,13 @@ if (!function_exists('verify_csrf')) {
             http_response_code(419);
             die('Invalid CSRF token.');
         }
+    }
+}
+
+if (!function_exists('str_starts_with')) {
+    function str_starts_with(string $haystack, string $needle): bool
+    {
+        return substr($haystack, 0, strlen($needle)) === $needle;
     }
 }
 

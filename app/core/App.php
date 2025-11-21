@@ -9,6 +9,11 @@ class App
         $route = $_GET['route'] ?? ($this->isAuthenticated() ? 'dashboard/index' : $this->defaultRoute);
         $route = trim($route, '/');
 
+        // Remove query string from route if present (e.g., "config/index?entity=departments" -> "config/index")
+        if (($pos = strpos($route, '?')) !== false) {
+            $route = substr($route, 0, $pos);
+        }
+
         if ($route === '') {
             $route = 'dashboard/index';
         }
@@ -16,6 +21,12 @@ class App
         $segments = explode('/', $route);
         $controllerName = ucfirst($segments[0]) . 'Controller';
         $method = $segments[1] ?? 'index';
+        
+        // Remove query string from method name if present
+        if (($pos = strpos($method, '?')) !== false) {
+            $method = substr($method, 0, $pos);
+        }
+        
         $params = array_slice($segments, 2);
 
         if (!class_exists($controllerName)) {

@@ -70,7 +70,7 @@ class ConfigController extends Controller
 
         $this->config->save($entity, $payload, $id);
         flash_set('config', ucfirst($entity) . ' saved.', 'success');
-        redirect('config/index?entity=' . $entity);
+        redirect('config/index', ['entity' => $entity]);
     }
 
     public function delete(int $id): void
@@ -78,9 +78,9 @@ class ConfigController extends Controller
         $this->requireAuth(['admin']);
         verify_csrf();
         $entity = $_POST['entity'] ?? 'departments';
-        $this->config->delete($entity, $id);
+        $this->config->deleteEntity($entity, $id);
         flash_set('config', 'Record deleted.', 'info');
-        redirect('config/index?entity=' . $entity);
+        redirect('config/index', ['entity' => $entity]);
     }
 }
 

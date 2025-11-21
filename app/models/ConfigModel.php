@@ -52,7 +52,7 @@ class ConfigModel extends Model
         }
     }
 
-    public function delete(string $entity, int $id): void
+    public function deleteEntity(string $entity, int $id): void
     {
         $table = $this->entities[$entity]['table'] ?? null;
         if (!$table) {
